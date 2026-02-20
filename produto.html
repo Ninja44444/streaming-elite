@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Produto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background-color: #1e1e2e;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .card {
+            background-color: #2d2d44;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        h1 { margin-bottom: 20px; }
+
+        .price {
+            font-size: 2rem;
+            color: #00b894;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #6c5ce7;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .voltar {
+            display: block;
+            margin-top: 30px;
+            color: #00cec9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1 id="nomeProduto">Carregando...</h1>
+    <div class="price" id="precoProduto"></div>
+
+    <a id="btnWhats" class="btn" target="_blank">
+        Comprar via WhatsApp
+    </a>
+
+    <a href="index.html" class="voltar">← Voltar</a>
+</div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const nome = params.get("produto");
+    const preco = params.get("preco");
+
+    if (nome && preco) {
+        document.getElementById("nomeProduto").innerText = nome;
+        document.getElementById("precoProduto").innerText = "R$ " + preco;
+
+        const mensagem = `Olá, tenho interesse no ${nome} por R$ ${preco}`;
+        const numero = "5511976645913";
+
+        document.getElementById("btnWhats").href =
+            `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+    } else {
+        document.getElementById("nomeProduto").innerText = "Produto não encontrado";
+    }
+</script>
+
+</body>
+</html>
